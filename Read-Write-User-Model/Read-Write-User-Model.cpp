@@ -1,6 +1,13 @@
-#include <iostream>
+#include <Windows.h>
+#include "iostream"
+#include "Driver.hpp"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	DWORD PID = GetProcessId("process_name.exe");
+	if (!Driver::initialize(PID))
+	{
+		std::cout << "Failed to initialize Driver" << std::endl;
+	}
+
 }
