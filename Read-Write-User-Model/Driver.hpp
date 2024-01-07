@@ -35,3 +35,26 @@ typedef struct write_t {
 	SIZE_T size;
 	NTSTATUS result;
 } write, * p_write;
+
+namespace Driver {
+	inline HANDLE driverHandle;
+	__forceinline auto isvalidptr(uint64_t ptr) {
+		if (ptr < 0x500 || ptr > 0x7FFFFFFFFFFF) return false;
+		return true;
+	}
+
+	__forceinline auto initialize(DWORD pId) -> bool {
+		driverHandle = CreateFileW(DRIVER_NAME, GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+		if (driverHandle == INVALID_HANDLE_VALUE) [[unlikely]] {
+			return false;
+			}
+
+		init_t ioData;
+		ioData.processId = pId;
+		ioData.result = -1;
+
+		DeviceIoControl(driverHandle, IO_INIT_REQUEST, &ioData, sizeof(ioData), &ioData, sizeof(ioData), nullptr, nullptr);
+		return ioData.result == 0;
+	}
+}
