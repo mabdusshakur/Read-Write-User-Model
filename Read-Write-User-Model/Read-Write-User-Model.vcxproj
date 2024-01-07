@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="Read-Write-User-Model.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="skCrypter.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
