@@ -10,4 +10,6 @@ int main()
 		std::cout << "Failed to initialize Driver" << std::endl;
 	}
 
+	//Driver::read();
+	//Driver::write();
 }
