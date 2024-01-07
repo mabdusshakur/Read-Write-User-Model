@@ -75,4 +75,17 @@ namespace Driver {
 		return *(Type*)&returnValue;
 	}
 
+	template <typename Type>
+	__forceinline auto write(uint64_t address, Type value) -> NTSTATUS
+	{
+		if (address < 0x0 || address > 0x7FFFFFFFFFFF) return -1;
+		write_t ioData;
+		ioData.size = sizeof(Type);
+		ioData.address = address;
+		ioData.value = &value;
+		ioData.result = -1;
+
+		DeviceIoControl(driverHandle, IO_WRITE_REQUEST, &ioData, sizeof(ioData), &ioData, sizeof(ioData), nullptr, nullptr);
+		return ioData.result;
+	}
 }
