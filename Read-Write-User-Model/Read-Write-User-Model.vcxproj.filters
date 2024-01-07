@@ -16,6 +16,9 @@
     <Filter Include="Protection">
       <UniqueIdentifier>{5eb74d8e-b987-4d3c-a51a-ded87e0ba2e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Driver">
+      <UniqueIdentifier>{ecb6dda2-feb0-4d74-8de2-fab2fe5d7cf5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Read-Write-User-Model.cpp">
@@ -25,6 +28,9 @@
   <ItemGroup>
     <ClInclude Include="skCrypter.h">
       <Filter>Protection</Filter>
+    </ClInclude>
+    <ClInclude Include="Driver.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

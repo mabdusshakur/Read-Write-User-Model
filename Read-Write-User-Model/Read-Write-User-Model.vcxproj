@@ -130,6 +130,7 @@
     <ClCompile Include="Read-Write-User-Model.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Driver.hpp" />
     <ClInclude Include="skCrypter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
