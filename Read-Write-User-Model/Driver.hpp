@@ -57,4 +57,22 @@ namespace Driver {
 		DeviceIoControl(driverHandle, IO_INIT_REQUEST, &ioData, sizeof(ioData), &ioData, sizeof(ioData), nullptr, nullptr);
 		return ioData.result == 0;
 	}
+
+	template <typename Type>
+	__forceinline auto read(uintptr_t address) -> Type
+	{
+		if (address < 0x0 || address > 0x7FFFFFFFFFFF) return Type();
+		read_t ioData;
+		ioData.address = address;
+
+		Type returnValue;
+		ioData.response = &returnValue;
+		ioData.size = sizeof(Type);
+		ioData.result = -1;
+
+		DeviceIoControl(driverHandle, IO_READ_REQUEST, &ioData, sizeof(ioData), &ioData, sizeof(ioData), nullptr, nullptr);
+		if (ioData.result != 0) return Type();
+		return *(Type*)&returnValue;
+	}
+
 }
